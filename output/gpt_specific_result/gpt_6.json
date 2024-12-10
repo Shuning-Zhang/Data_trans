@@ -1,0 +1,17 @@
+[
+    {
+        "6_1_0": "```python\ndef transform_dataset(test_set):\n    header = test_set[0][1:]\n    transformed_data = []\n    for row in test_set[2:]:\n        product_name = row[0]\n        values = row[1:]\n        for i, value in enumerate(values):\n            transformed_data.append([header[i], product_name, value])\n    return transformed_data\n\n# Example usage:\ntest_set = [\n    ['', 'A', 'B', 'C'],\n    ['', '', '', ''],\n    ['Product2', '3', '5', '10'],\n    ['Product3', '0', '1', '4'],\n    ['Product4', '1', '0', '0'],\n    ['Product5', '3', '8', '7'],\n    ['Product6', '9', '2', '1']\n]\n\nresult = transform_dataset(test_set)\nfor row in result:\n    print(row)\n```\n"
+    },
+    {
+        "6_2_0": "```python\ndef transform_dataset(test_set):\n    output_dataset = []\n    header = test_set[0][1:]\n    \n    for row in test_set[2:]:\n        product = row[0]\n        for i, value in enumerate(row[1:]):\n            output_row = [header[i], product, value]\n            output_dataset.append(output_row)\n    \n    return output_dataset\n\n# Example usage with the test set\ntest_set = [['', 'A', 'B', 'C'], ['', '', '', ''], ['Product3', '0', '1', '4'], ['Product4', '1', '0', '0'], ['Product5', '3', '8', '7'], ['Product6', '9', '2', '1']]\ntransformed_data = transform_dataset(test_set)\nprint(transformed_data)\n```\n"
+    },
+    {
+        "6_3_0": "```python\ndef transform_dataset(input_data):\n    output_data = []\n    headers = input_data[0][1:]\n    for row in input_data[2:]:\n        product = row[0]\n        values = row[1:]\n        for header, value in zip(headers, values):\n            output_data.append([header, product, value])\n    return output_data\n\n# Test function with the provided test set\ntest_set = [['', 'A', 'B', 'C'], ['', '', '', ''], ['Product4', '1', '0', '0'], ['Product5', '3', '8', '7'], ['Product6', '9', '2', '1']]\nresult = transform_dataset(test_set)\nprint(result)\n```\n"
+    },
+    {
+        "6_4_0": "```python\ndef transform_dataset(input_dataset):\n    output_dataset = []\n    headers = input_dataset[0][1:]\n    for row in input_dataset[2:]:\n        product = row[0]\n        values = row[1:]\n        for header, value in zip(headers, values):\n            output_dataset.append([header, product, value])\n    return output_dataset\n\n# Test the function with the given test set\ntest_set = [['', 'A', 'B', 'C'], ['', '', '', ''], ['Product5', '3', '8', '7'], ['Product6', '9', '2', '1']]\ntransformed_test_set = transform_dataset(test_set)\nprint(transformed_test_set)\n```\n"
+    },
+    {
+        "6_5_0": "```python\ndef transform_dataset(test_set):\n    output = []\n    headers = test_set[0][1:]  # Ignore the first empty string\n    products = test_set[2:]    # Start from the third element, ignore empty rows\n    \n    for product in products:\n        product_name = product[0]\n        for header, value in zip(headers, product[1:]):\n            output.append([header, product_name, value])\n    \n    return output\n\n# Example usage with test set\ntest_set = [\n    ['', 'A', 'B', 'C'], \n    ['', '', '', ''], \n    ['Product6', '9', '2', '1']\n]\n\ntransformed_output = transform_dataset(test_set)\nprint(transformed_output)\n```\n"
+    }
+]

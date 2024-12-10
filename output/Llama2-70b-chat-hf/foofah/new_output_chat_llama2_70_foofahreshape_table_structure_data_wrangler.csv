@@ -1,0 +1,818 @@
+data,output
+craigslist_data_wrangler_1,
+craigslist_data_wrangler_2,"def transform_data(data):
+    """"""
+    Transform data by extracting numbers and reducing strings to their first word.
+    """"""
+    return [re.findall(r'\d+', str)[0] for str in data]
+"
+craigslist_data_wrangler_3,"def transform_data(data):
+    """"""
+    Transforms the input dataset by extracting the number and unit from the description.
+    """"""
+    transformed_data = []
+    for item in data:
+        # Extract the number and unit from the description
+        number = re.search(r'\d+', item['description']).group()
+        unit = re.search(r'[a-zA-Z]+', item['description']).group()
+        
+        # Create a new dictionary with the extracted information
+        transformed_item = {'number': number, 'unit': unit}
+        
+        # Add the transformed item to the list
+        transformed_data.append(transformed_item)
+    
+    return transformed_data
+"
+craigslist_data_wrangler_4,"def transform_data(data):
+    """"""
+    Transforms the input data by extracting the number and unit from the description.
+    """"""
+    transformed_data = []
+    for item in data:
+        # Extract the number and unit from the description
+        number = re.search(r'\d+', item['description']).group()
+        unit = re.search(r'[a-zA-Z]+', item['description']).group()
+        # Create a new dictionary with the extracted data
+        transformed_item = {'number': number, 'unit': unit}
+        # Add the transformed item to the list
+        transformed_data.append(transformed_item)
+    return transformed_data
+"
+craigslist_data_wrangler_5,"def transform_data(data):
+    """"""
+    Transforms the input data by extracting the number and unit from the description.
+    """"""
+    transformed_data = []
+    for item in data:
+        # Extract the number and unit from the description
+        number = re.search(r'\d+', item['description']).group()
+        unit = re.search(r'[a-zA-Z]+', item['description']).group()
+        # Create a new dictionary with the extracted data
+        transformed_item = {'number': number, 'unit': unit}
+        # Add the transformed item to the list
+        transformed_data.append(transformed_item)
+    return transformed_data
+"
+crime_data_wrangler_1,"def transform_data(data):
+    """"""
+    Transforms the given data list by moving the first element to the end,
+    and then splitting the remaining elements into separate lists.
+    """"""
+    # Move first element to the end
+    data.insert(len(data) - 1, data.pop(0))
+    
+    # Split remaining elements into separate lists
+    return [data[i:i+2] for i in range(0, len(data), 2)]
+"
+crime_data_wrangler_2,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Parameters:
+    data (list): The input data list.
+
+    Returns:
+    A new list with the transformed data.
+    """"""
+    # Step 1: Extract the first element of each sublist
+    first_elements = [item[0] for item in data]
+
+    # Step 2: Extract the remaining elements of each sublist
+    remaining_elements = [item[1:] for item in data]
+
+    # Step 3: Convert the remaining elements to a list of lists
+    converted_elements = [list(item) for item in remaining_elements]
+
+    # Step 4: Combine the first element and the converted elements
+    combined_elements = [first_elements, converted_elements]
+
+    # Step 5: Return the combined elements
+    return combined_elements
+"
+crime_data_wrangler_3,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Parameters:
+    data (list): The input data list.
+
+    Returns:
+    A new list with the transformed data.
+    """"""
+    # Step 1: Remove empty strings from the list
+    data = [item for item in data if item != '']
+
+    # Step 2: Split the list into sublists of 6 elements each
+    chunks = [data[i:i+6] for i in range(0, len(data), 6)]
+
+    # Step 3: Convert each sublist into a dictionary
+    dictionaries = []
+    for chunk in chunks:
+        dictionaries.append({})
+        for i in range(6):
+            key = chunk[i]
+            if i == 0:
+                # Special case for the first element
+                dictionaries[-1][key] = ''
+            else:
+                dictionaries[-1][key] = chunk[i-1]
+
+    # Step 4: Return the list of dictionaries
+    return dictionaries
+"
+crime_data_wrangler_4,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Parameters:
+    data (list): The input data list.
+
+    Returns:
+    A new list with the transformed data.
+    """"""
+    # Step 1: Extract the first element of each sublist
+    first_elements = [item[0] for item in data]
+
+    # Step 2: Extract the remaining elements of each sublist
+    remaining_elements = [item[1:] for item in data]
+
+    # Step 3: Convert the remaining elements to a list of lists
+    converted_elements = [list(item) for item in remaining_elements]
+
+    # Step 4: Combine the first element and the converted elements
+    combined_elements = [first_elements + item for item in converted_elements]
+
+    # Step 5: Return the combined elements
+    return combined_elements
+"
+crime_data_wrangler_5,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Parameters:
+    data (list): The input data list.
+
+    Returns:
+    A new list with the transformed data.
+    """"""
+    # Step 1: Remove empty strings from the list
+    data = [x for x in data if x != '']
+
+    # Step 2: Split the list into sublists of 6 elements each
+    chunks = [data[i:i+6] for i in range(0, len(data), 6)]
+
+    # Step 3: Convert each sublist into a dictionary
+    dictionaries = []
+    for chunk in chunks:
+        dictionaries.append({'State': chunk[0], 'Year': chunk[1], 'Crime rate': chunk[2], 'Population': chunk[3], 'Density': chunk[4], 'Change': chunk[5]})
+
+    # Step 4: Flatten the list of dictionaries into a single list
+    transformed_data = [x for y in dictionaries for x in y.values()]
+
+    return transformed_data
+"
+potters_wheel_divide_1,"def transform_data(data):
+    """"""
+    Transforms the given data list by removing any duplicates and sorting the remaining items.
+    """"""
+    # Remove duplicates
+    data = list(set(data))
+    # Sort the data
+    data.sort()
+    return data
+"
+potters_wheel_divide_2,"def transform_data(data):
+    """"""
+    Transforms the given data list by moving the first element of each sublist to the end of the sublist.
+    """"""
+    return [x[:-1] + [x[-1]] for x in data]
+"
+potters_wheel_divide_3,"def transform_data(data):
+    """"""
+    Transforms the given data list by adding an empty string to the end of each list element.
+    """"""
+    transformed_data = []
+    for element in data:
+        transformed_element = element + ['']
+        transformed_data.append(transformed_element)
+    return transformed_data
+"
+potters_wheel_divide_4,
+potters_wheel_divide_5,"def transform_data(data):
+    """"""
+    Transforms the given data list by adding an empty string to the end of each list element.
+    """"""
+    transformed_data = []
+    for element in data:
+        transformed_element = element + ['']
+        transformed_data.append(transformed_element)
+    return transformed_data
+"
+potters_wheel_fold_1,"def transform_data(data):
+    """"""
+    Transforms the input data into a new format.
+
+    Args:
+        data (list): The input data in the format of [['name', 'subject1:score1', 'subject2:score2']].
+
+    Returns:
+        list: The transformed data in the format of [['', 'subject1', 'subject2'], ['name', 'score1', 'score2']].
+    """"""
+    # Extract the names and subjects from the input data
+    names = [name for name, _, _ in data]
+    subjects = [subject.split(':')[0] for _, subject, _ in data]
+    scores = [score.split(':')[1] for _, _, score in data]
+
+    # Create a new list with the transformed data
+    transformed_data = [['', subjects, scores], names]
+
+    return transformed_data
+"
+potters_wheel_fold_2,"def transform_data(data):
+    """"""
+    Transforms the input data into a new format.
+
+    Args:
+        data (list): The input data in the format of [['name', 'subject1', 'subject2'], ['name2', 'subject3', 'subject4']]
+
+    Returns:
+        list: The transformed data in the format of [['', 'subject1', 'subject2'], ['name', 'value1', 'value2']]
+    """"""
+    # Create a list to store the transformed data
+    transformed_data = []
+
+    # Iterate through each row in the input data
+    for row in data:
+        # Extract the name and subjects from the row
+        name, subject1, subject2 = row
+
+        # Create a new row with the name and subjects as separate elements
+        transformed_row = [name, subject1, subject2]
+
+        # Append the transformed row to the transformed data list
+        transformed_data.append(transformed_row)
+
+    return transformed_data
+"
+potters_wheel_fold_3,"def transform_data(data):
+    """"""
+    Transforms the input data by moving the first element of each list to the end,
+    and renaming the columns to 'Math' and 'French'.
+    """"""
+    return [['', 'Math', 'French']] + [list(reversed(row)) for row in data]
+"
+potters_wheel_fold_4,"def transform_data(data):
+    """"""
+    Transforms the input data by moving the first element of each list to the end,
+    and then converting the resulting list of lists into a list of tuples.
+    """"""
+    # Move first element of each list to the end
+    for i in range(len(data)):
+        data[i].insert(len(data[i]) - 1, data[i].pop(0))
+    
+    # Convert list of lists to list of tuples
+    return list(map(tuple, data))
+"
+potters_wheel_fold_5,
+potters_wheel_fold_2_1,"def transform_data(data):
+    """"""
+    Transforms the given dataset by splitting the columns and rows.
+    """"""
+    # Initialize empty lists to store the transformed data
+    transformed_data = []
+    headers = []
+
+    # Iterate over the rows in the dataset
+    for row in data:
+        # Split the row into columns
+        columns = row.split("","")
+
+        # Add the columns to the transformed data
+        transformed_data.append(columns)
+
+        # Add the first column to the headers
+        headers.append(columns.pop(0))
+
+    # Return the transformed data and headers
+    return transformed_data, headers
+"
+potters_wheel_fold_2_2,"def transform_data(data):
+    """"""
+    Transforms the given dataset by splitting the input data into separate lists.
+    """"""
+    # Initialize empty lists to store the transformed data
+    transformed_data = []
+    headers = []
+
+    # Iterate through the input data
+    for row in data:
+        # Split the row into separate elements
+        elements = row[1:].split("","")
+
+        # Add the elements to the transformed data
+        transformed_data.append(elements)
+
+        # Add the first element of the row as a header
+        headers.append(row[0])
+
+    # Return the transformed data and headers
+    return transformed_data, headers
+"
+potters_wheel_fold_2_3,"def transform_data(data):
+    """"""
+    Transforms the input data by moving the first element of each list to the end,
+    and renaming the columns to generic names.
+    """"""
+    # Create a list to store the transformed data
+    transformed_data = []
+
+    # Iterate through the input data
+    for row in data:
+        # Move the first element of the row to the end
+        row.insert(len(row) - 1, row.pop(0))
+
+        # Rename the columns
+        row.insert(0, '')
+        row.insert(1, 'Math')
+        row.insert(2, 'French')
+        row.insert(3, 'History')
+
+        # Add the transformed row to the list
+        transformed_data.append(row)
+
+    return transformed_data
+"
+potters_wheel_fold_2_4,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Args:
+        data (list): The input data list.
+
+    Returns:
+        list: The transformed data list.
+    """"""
+    # Extract the header from the first row
+    header = data[0]
+
+    # Remove the header from the first row
+    data.pop(0)
+
+    # Create a new list to store the transformed data
+    transformed_data = []
+
+    # Iterate over each row in the data
+    for row in data:
+        # Initialize a new list to store the transformed row
+        transformed_row = []
+
+        # Iterate over each column in the row
+        for col in row:
+            # If the column is not the first column, add a space separator
+            if col != header[0]:
+                transformed_row.append("" "")
+
+            # Add the column value to the transformed row
+            transformed_row.append(col)
+
+        # Add the transformed row to the transformed data list
+        transformed_data.append(transformed_row)
+
+    # Return the transformed data list
+    return transformed_data
+"
+potters_wheel_fold_2_5,
+potters_wheel_merge_split_1,"def transform_data(data):
+    """"""
+    Transforms the given data list by reversing the order of the elements in each list.
+    """"""
+    transformed_data = []
+    for item in data:
+        transformed_item = [x for x in item[::-1]]  # Reverse the order of the elements
+        transformed_data.append(transformed_item)
+    return transformed_data
+"
+potters_wheel_merge_split_2,"def transform_data(data):
+    """"""
+    Transforms the input data by splitting the names and removing the empty strings.
+    """"""
+    transformed_data = []
+    for row in data:
+        names = [name.strip() for name in row[1:]]
+        transformed_row = [name for name in names if name != '']
+        transformed_data.append(transformed_row)
+    return transformed_data
+"
+potters_wheel_merge_split_3,"def transform_data(data):
+    """"""
+    Transforms the input data by splitting the strings in each list element into separate elements.
+    """"""
+    transformed_data = []
+    for element in data:
+        # Split the element into separate strings
+        element_list = element.split(',')
+        # Remove empty strings from the list
+        element_list = [item for item in element_list if item.strip() != '']
+        # Join the list elements back into a string
+        transformed_element = ','.join(element_list)
+        transformed_data.append(transformed_element)
+    return transformed_data
+"
+potters_wheel_merge_split_4,"def transform_data(data):
+    """"""
+    Transforms the input data by splitting the strings in each list element into separate elements.
+    """"""
+    transformed_data = []
+    for element in data:
+        # Split the element into separate strings
+        element_list = element.split(',')
+        # Remove empty strings from the list
+        element_list = [item for item in element_list if item != '']
+        # Join the list elements back into a string
+        transformed_element = ','.join(element_list)
+        transformed_data.append(transformed_element)
+    return transformed_data
+"
+potters_wheel_merge_split_5,"def transform_data(data):
+    """"""
+    Transforms the input data by splitting the strings in each list element into separate elements.
+    """"""
+    transformed_data = []
+    for element in data:
+        # Split the element into separate strings
+        element_list = element.split(',')
+        # Remove empty strings
+        element_list = [item for item in element_list if item != '']
+        # Join the list elements back into a string
+        transformed_element = ','.join(element_list)
+        transformed_data.append(transformed_element)
+    return transformed_data
+"
+potters_wheel_split_fold_1,"def transform_data(data):
+    """"""
+    Transform data by splitting each element into a list of individual elements.
+    """"""
+    transformed_data = []
+    for element in data:
+        if isinstance(element, str):
+            element_list = element.split("", "")
+            transformed_data.extend(element_list)
+        else:
+            transformed_data.append(element)
+    return transformed_data
+"
+potters_wheel_split_fold_2,"def transform_data(data):
+    """"""
+    Transform data by splitting names into separate elements and creating a new list with the transformed data.
+    """"""
+    transformed_data = []
+    for name in data:
+        # Split name into separate elements
+        elements = name.split(',')
+        # Create a new list with the transformed data
+        transformed_data.extend(elements)
+    return transformed_data
+"
+potters_wheel_split_fold_3,"def transform_data(data):
+    """"""
+    Transform data by splitting names with commas into individual names.
+    """"""
+    transformed_data = []
+    for name, value in data:
+        names = name.split("","")
+        for i, name in enumerate(names):
+            transformed_data.append((name.strip(), value))
+    return transformed_data
+"
+potters_wheel_split_fold_4,"def transform_data(data):
+    """"""
+    Transform data by splitting names and values into separate lists.
+    """"""
+    transformed_data = []
+    for item in data:
+        name, value = item[0], item[1:]
+        transformed_data.append([name])
+        transformed_data.extend(value)
+    return transformed_data
+"
+potters_wheel_split_fold_5,"def transform_data(data):
+    """"""
+    Transform the input data by splitting the elements in each list into separate lists.
+    """"""
+    transformed_data = []
+    for item in data:
+        # Split the item into separate lists
+        transformed_item = [x.strip() for x in item.split(',')]
+        # Add the transformed item to the new list
+        transformed_data.extend(transformed_item)
+    return transformed_data
+"
+potters_wheel_unfold_1,"def transform_data(data):
+    """"""
+    Transforms the given data list by moving the first element of each sublist to the end,
+    and then flattening the sublists into a single list.
+    """"""
+    return [item.pop(0) for item in data] + [item for sublist in data for item in sublist]
+"
+potters_wheel_unfold_2,"def transform_data(data):
+    """"""
+    Transforms the given data list by combining the first two elements of each sublist and moving the remaining elements to the end.
+    """"""
+    transformed_data = []
+    for sublist in data:
+        transformed_sublist = []
+        transformed_sublist.append(sublist[0])
+        transformed_sublist.append(sublist[1])
+        transformed_sublist.extend(sublist[2:])
+        transformed_data.append(transformed_sublist)
+    return transformed_data
+"
+potters_wheel_unfold_3,"def transform_data(data):
+    """"""
+    Transforms the given data list by creating a new list with additional columns for 'Math', 'French', and 'English' subjects.
+    The values in the new columns are taken from the corresponding values in the original list.
+    """"""
+    new_data = []
+    for person in data:
+        # Create a new list for the person's subjects
+        subjects = ['', 'Math', 'French', 'English']
+        
+        # Add the person's name to the list
+        subjects.insert(0, person[0])
+        
+        # Add the person's scores to the list
+        subjects.insert(1, person[1])
+        subjects.insert(2, person[2])
+        subjects.insert(3, '')
+        
+        # Add the list to the new data list
+        new_data.append(subjects)
+    
+    return new_data
+"
+potters_wheel_unfold_4,"def transform_data(data):
+    # Create a new list to store the transformed data
+    transformed_data = []
+
+    # Iterate through each row in the input data
+    for row in data:
+        # Extract the values from the row
+        values = [val for val in row]
+
+        # Add the values to the transformed data list
+        transformed_data.append(values)
+
+    # Return the transformed data list
+    return transformed_data
+"
+potters_wheel_unfold_5,"def transform_data(data):
+    # Create a new list to store the transformed data
+    transformed_data = []
+
+    # Iterate through each row in the input data
+    for row in data:
+        # Extract the values from the row
+        values = [val for val in row]
+
+        # Add the values to the transformed data list
+        transformed_data.append(values)
+
+    # Return the transformed data list
+    return transformed_data
+"
+potters_wheel_unfold2_1,
+potters_wheel_unfold2_2,"def transform_data(data):
+    """"""
+    Transforms the given data by grouping elements with the same first element into lists.
+    """"""
+    transformed_data = []
+    for group in groupby(data, key=lambda x: x[0]):
+        transformed_data.append(list(group))
+    return transformed_data
+"
+potters_wheel_unfold2_3,"def transform_data(data):
+    """"""
+    Transforms the given data by grouping elements with the same first element into lists.
+    """"""
+    transformed_data = []
+    for group in groupby(data, key=lambda x: x[0]):
+        group = list(group)
+        group.append(group.pop())  # add the last element of the group to the list
+        transformed_data.append(group)
+    return transformed_data
+"
+potters_wheel_unfold2_4,"def transform_data(data):
+    """"""
+    Transforms the given data by grouping elements with the same first element into lists.
+    """"""
+    transformed_data = []
+    for group in groupby(data, key=lambda x: x[0]):
+        group = list(group)
+        group.append(None)  # add a None element to the end of each group
+        transformed_data.append(group)
+    return transformed_data
+"
+potters_wheel_unfold2_5,"def transform_data(data):
+    """"""
+    Transforms the given data list by grouping elements with the same first element into lists.
+    """"""
+    transformed_data = []
+    for group in groupby(data, key=lambda x: x[0]):
+        group = list(group)
+        transformed_data.append(group[0])
+        for i in range(1, len(group)):
+            transformed_data.append(group[i])
+    return transformed_data
+"
+proactive_wrangling_fold_1,"def transform_data(data):
+    """"""
+    Transforms the given data by moving the first column to the end and
+    creating a new column with the values from the second column.
+    """"""
+    # Create a new list to store the transformed data
+    transformed_data = []
+
+    # Iterate through each row in the data
+    for row in data:
+        # Move the first column to the end
+        transformed_data.append(row.pop(0))
+
+        # Create a new column with the values from the second column
+        transformed_data.append(row[1])
+
+    return transformed_data
+"
+proactive_wrangling_fold_2,"def transform_data(data):
+    """"""
+    Transforms the given data list by moving the second column to the first column,
+    and the third column to the second column.
+    """"""
+    return [[row[1], row[0], row[2]] for row in data]
+"
+proactive_wrangling_fold_3,"def transform_data(data):
+    """"""
+    Transforms the given data list by splitting the first column into two separate columns.
+    """"""
+    # Create a list to store the transformed data
+    transformed_data = []
+
+    # Iterate through each row in the data list
+    for row in data:
+        # Split the first column into two separate values
+        values = row[0].split(' ')
+
+        # Create a new row with the transformed data
+        transformed_row = [values[0], values[1], row[1], row[2]]
+
+        # Add the transformed row to the list
+        transformed_data.append(transformed_row)
+
+    return transformed_data
+"
+proactive_wrangling_fold_4,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Args:
+        data (list): The input data list is in the format of [['', 'Boys', 'Girls'], ['Australia', '1', '2'], ['Austria', '3', '4'], ...]
+
+    Returns:
+        list: The transformed data list is in the format of [['Australia', 'Boys', '1'], ['Australia', 'Girls', '2'], ['Austria', 'Boys', '3'], ...]
+    """"""
+    new_data = []
+    for country, boys, girls in data:
+        new_data.append([country, 'Boys', boys])
+        new_data.append([country, 'Girls', girls])
+    return new_data
+"
+proactive_wrangling_fold_5,"def transform_data(data):
+    """"""
+    Transforms the given data list by splitting the second column into two separate columns.
+    """"""
+    transformed_data = []
+    for row in data:
+        country, gender_and_value = row[1], row[2]
+        gender, value = gender_and_value.split(',')
+        transformed_data.append([country, gender, value])
+    return transformed_data
+"
+proactive_wrangling_complex_1,
+proactive_wrangling_complex_2,
+proactive_wrangling_complex_3,
+proactive_wrangling_complex_4,
+proactive_wrangling_complex_5,
+reshape_table_structure_data_wrangler_1,"def transform_data(data):
+    """"""
+    Transforms the given data list by combining the year and month columns into a single column,
+    and converting the year column to an integer.
+    """"""
+    # Convert year column to integer
+    data['year'] = pd.to_numeric(data['year'])
+    
+    # Combine year and month columns into a single column
+    data['date'] = pd.to_datetime(data[['year', 'month']].astype(str))
+    
+    # Drop year and month columns
+    data.drop(['year', 'month'], axis=1, inplace=True)
+    
+    return data
+"
+reshape_table_structure_data_wrangler_2,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Args:
+        data (list): The input data list.
+
+    Returns:
+        list: The transformed data list.
+    """"""
+    # Step 1: Extract the unique years and months from the data
+    years = set()
+    months = set()
+    for row in data:
+        years.add(row[0])
+        months.add(row[1])
+
+    # Step 2: Create a new list with the unique years and months as headers
+    headers = list(years) + list(months)
+
+    # Step 3: Transform the data into the new format
+    transformed_data = []
+    for row in data:
+        year = row[0]
+        month = row[1]
+        value = row[2]
+        transformed_row = [year, month, value]
+        transformed_data.append(transformed_row)
+
+    # Step 4: Return the transformed data
+    return headers + transformed_data
+"
+reshape_table_structure_data_wrangler_3,"def transform_data(data):
+    """"""
+    Transforms the given data list into a new format.
+
+    Args:
+        data (list): The input data list.
+
+    Returns:
+        list: The transformed data list.
+    """"""
+    # Create a list to store the transformed data
+    transformed_data = []
+
+    # Iterate over the input data list
+    for i in range(len(data)):
+        # Extract the year and value from the current data point
+        year = data[i][0]
+        value = data[i][1]
+
+        # Create a new list for the current year
+        year_data = []
+
+        # Add the year and value to the new list
+        year_data.append(year)
+        year_data.append(value)
+
+        # Add the new list to the transformed data list
+        transformed_data.append(year_data)
+
+    return transformed_data
+"
+reshape_table_structure_data_wrangler_4,"def transform_data(data):
+    # Convert data to a dictionary
+    data_dict = {}
+    for row in data:
+        data_dict[row[0]] = row[1:]
+
+    # Sort the data by year and month
+    sorted_data = sorted(data_dict.items(), key=lambda x: (x[0][0], x[0][1]))
+
+    # Create a new list with the transformed data
+    transformed_data = []
+    for year, month_data in sorted_data:
+        month_list = []
+        for month in month_data:
+            month_list.append(month)
+        transformed_data.append(month_list)
+
+    return transformed_data
+"
+reshape_table_structure_data_wrangler_5,"def transform_data(data):
+    # Convert data to a dictionary
+    data_dict = {}
+    for row in data:
+        data_dict[row[0]] = row[1:]
+
+    # Sort the data by year and month
+    sorted_data = sorted(data_dict.items(), key=lambda x: (x[0][0], x[0][1]))
+
+    # Create a new list with the transformed data
+    transformed_data = []
+    for year, month, value in sorted_data:
+        transformed_data.append([year, month, value])
+
+    return transformed_data
+"
