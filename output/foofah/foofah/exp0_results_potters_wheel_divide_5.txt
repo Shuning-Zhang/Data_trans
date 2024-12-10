@@ -1,1 +1,0 @@
-[["", "Anna", "Davis"], ["", "Joan", "Marsh"], ["", "Daenerys", "Rhaenys"], ["", "Robb", "Sansa"], ["", "Jaime", "Cersei"], ["Hoster, Tully", "", ""], ["", "Lysa", "Catelyn"]]
