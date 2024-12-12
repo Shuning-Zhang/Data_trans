@@ -22,15 +22,16 @@ TEMPLATE_C= '''
 
     Given an example input and output dataset, learn how the transformation performed from the provided input dataset to the output dataset. 
         
-    Pay attention to the size difference between the input and output dataset.
+    Pay attention to the size difference between the input and output dataset. Please make sure to print the output of the function.
     
     Generate python function with no explanations needed. 
-        
-    input dataset: {input_list} 
+
+    Please make sure to print the output of the function, print(output), no need to print row by row.
+    Include test_list as the function input! Do not include the original input_list or output_list directly in the code.
+
+    input dataset: {input_list}
     output dataset: {output_list}
-    
-    you are also given a test set {test_list} where you should include the test set in your python code as the function input
-    Do not include input database in your code output
+    test set: {test_list}
     
     '''
 TEMPLATE_6= '''
@@ -253,8 +254,10 @@ TEMPLATE_WITH_FUNC = '''
 
 
     Based on these transformations, generate a Python function that will take a new test set as input and apply the same transformation. 
-    Include test_list as the function parameter and ensure the code only outputs the function definition. Do not include the original input_list or output_list directly in the code.
-    
+    Please make sure to print the output of the function, print(output), no need to print row by row.
+    Include test_list as the function input! Do not include the original input_list or output_list directly in the code.
+   
+
     input dataset: {input_list}
     output dataset: {output_list}
     test set: {test_list}
