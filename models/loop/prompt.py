@@ -270,7 +270,32 @@ RETRY = '''
     Test list: {test_list}
     Generated output: {generated_output}
 '''
-    
+
+ERROR_IDENTIFIER = """
+    Given the correct output and the generated output, identify high-level differences between the two. Focus on structural issues, patterns, and anomalies rather than specific value mismatches.
+
+    Examples of high-level errors:
+    - Shape mismatch (number of rows or columns is incorrect).
+    - Duplicated rows or columns in the generated output.
+    - Missing rows or columns compared to the correct output.
+    - Incorrect order of rows or columns.
+    - Data type mismatches (e.g., strings instead of numbers).
+    - Patterns not followed (e.g., expected sequential values or categories).
+
+    Provide the errors in bullet points to help a programmer modify the code.
+
+    Correct output: {correct_output}
+    Generated output: {generated_output}
+    """
+
+
+RETRY_WITH_ERROR = '''
+    Given the previous code and the identified high-level error,
+    modify only the code in the code history—do not alter the input data—to ensure the generated output matches the correct output.
+    Code history: {code_history}
+    Error encountered: {error}
+    Generated output: {generated_output}
+'''
 
 BASE_PROMPT = '''
     You are a data scientist swpecializing in program by example, focusing on data wrangling and transformation tasks.

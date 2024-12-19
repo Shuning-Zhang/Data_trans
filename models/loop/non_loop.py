@@ -108,7 +108,7 @@ def gpt_output():
                 tmp_dic['final'] = [code, generated_output]
                 tmp_dic['full_chat_history'] = chat_history
 
-                ouput_file = './non_loop_simple/foofah_kg_'+str(j)+'_'+ str(i)+'.json'
+                ouput_file = './non_loop_simple_2/foofah_kg_'+str(j)+'_'+ str(i)+'.json'
 
                 # Write the dictionary to the Python file
                 with open(ouput_file, 'w') as file:
