@@ -1,0 +1,254 @@
+{
+    "0": [
+        "\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[:5]  # Merge relevant parts\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n",
+        [
+            [
+                "3099",
+                "905",
+                " AUST 4WD CUST ACT",
+                "NO.14",
+                "NO.14",
+                "Full Copies",
+                "6.7839",
+                "2"
+            ],
+            [
+                "3200",
+                "906",
+                "AUST HOUSE & GARDEN",
+                "9-Jun",
+                "9-Jun",
+                "Covers Only",
+                "4.7385",
+                "1"
+            ]
+        ]
+    ],
+    "errors": [
+        "- The generated output contains duplicate entries within each sublist, specifically for columns representing certain metadata (e.g., date and issue title).\n- The correct output has 7 columns, whereas the generated output has 8 columns due to these duplicate entries.",
+        "- Extra columns in the generated output: The generated output contains two additional columns (`'* *'` and `'0'`) that are not present in the correct output.\n- Missing elements in specific rows: The generated output has missing elements (`'NO.14'` and `'9-Jun'`) compared to the correct output in their respective positions.\n- Misalignment of data due to missing or extra elements: The placement of elements is incorrect in the generated output due to the presence of extra columns and missing original elements.",
+        "- The generated output contains duplicate entries within each sublist, specifically for columns representing certain attributes (e.g., 'NO.14' and '9-Jun' are repeated).\n- The generated output has an extra column within each sublist compared to the correct output, likely due to the aforementioned duplication."
+    ],
+    "1": [
+        "\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[2:7]  # Merge relevant parts while excluding duplicate columns\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n",
+        [
+            [
+                "3099",
+                "905",
+                " AUST 4WD CUST ACT",
+                "Full Copies",
+                "6.7839",
+                "2",
+                "* *",
+                "0"
+            ],
+            [
+                "3200",
+                "906",
+                "AUST HOUSE & GARDEN",
+                "Covers Only",
+                "4.7385",
+                "1",
+                "* *",
+                "0"
+            ]
+        ]
+    ],
+    "2": [
+        "\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts, correcting the range to exclude extra columns\n            new_entry = temp_data + entry[:5]\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n",
+        [
+            [
+                "3099",
+                "905",
+                " AUST 4WD CUST ACT",
+                "NO.14",
+                "NO.14",
+                "Full Copies",
+                "6.7839",
+                "2"
+            ],
+            [
+                "3200",
+                "906",
+                "AUST HOUSE & GARDEN",
+                "9-Jun",
+                "9-Jun",
+                "Covers Only",
+                "4.7385",
+                "1"
+            ]
+        ]
+    ],
+    "3": [
+        "\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts while ensuring no duplicates\n            new_entry = temp_data + entry[0:5:2]  # Select only the non-duplicate entries\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n",
+        [
+            [
+                "3099",
+                "905",
+                " AUST 4WD CUST ACT",
+                "NO.14",
+                "Full Copies",
+                "2"
+            ],
+            [
+                "3200",
+                "906",
+                "AUST HOUSE & GARDEN",
+                "9-Jun",
+                "Covers Only",
+                "1"
+            ]
+        ]
+    ],
+    "final": [
+        "\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts while ensuring no duplicates\n            new_entry = temp_data + entry[0:5:2]  # Select only the non-duplicate entries\n            output_list.append(new_entry)\n\n    print(output_list)\n\ntest_list = [\n    ['3167', '906', 'AUST PERSONAL COMPUTER', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '6.7839', '3', '* *', '0'],\n    ['2929', '924', 'AUTO ACTION', '', '', '', ''],\n    ['#1344', '#1344', 'Covers Only', '3.8181', '3', '* *', '0'],\n    ['5356', '901', 'BEAUT BEADED BAGS', '', '', '', ''],\n    ['# 1', '# 1', 'Full Copies', '10.1929', '3', '* *', '0'],\n    ['5950', '901', 'BETTER PHOTOGRAPHY', '', '', '', ''],\n    ['#55', '#55', 'Full Copies', '8.8293', '3', '* *', '0'],\n    ['60009', '905', 'BLISS', '', '', '', ''],\n    ['9-Apr', '9-Apr', 'Covers Only', '4.0567', '1', '* *', '0'],\n    ['6454', '911', 'CARRY ON DVD NAT', '', '', '', ''],\n    ['NO 32', 'NO 32', 'Full Copies', '13.6019', '1', '* *', '0'],\n    ['7127', '911', 'CL WAR MOVIES NAT', '', '', '', ''],\n    ['NO 30', 'NO 30', 'Full Copies', '13.6019', '1', '* *', '0'],\n    ['5210', '902', 'COSMOPOLITAN PREGNANCY', '', '', '', ''],\n    ['WINT09', 'WINT09', 'Full Copies', '9.2043', '3', '* *', '0'],\n    ['5714', '905', 'CRDMKNG STMPNG&PPRCRFT', '', '', '', ''],\n    ['V14#11', 'V14#11', 'Full Copies', '6.7839', '3', '* *', '0'],\n    ['7663', '911', 'DORA DOLL NAT', '', '', '', ''],\n    ['NO 24', 'NO 24', 'Full Copies', '5.4203', '1', '* *', '0'],\n    ['1876', '924', 'ECONOMIST THE', '', '', '', ''],\n    ['13-Jun', '13-Jun', 'Covers Only', '7.1589', '4', '* *', '0'],\n    ['1942', '923', 'ENG WOMANS WEEKLY', '', '', '', ''],\n    ['16-Jun', '16-Jun', 'Covers Only', '2.2499', '1', '* *', '0'],\n    ['5919', '906', 'FAST FOURS', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Full Copies', '6.7839', '2', '* *', '0']\n]\n\ntransform_input(test_list)\n",
+        [
+            [
+                "3167",
+                "906",
+                "AUST PERSONAL COMPUTER",
+                "9-Jun",
+                "Covers Only",
+                "3"
+            ],
+            [
+                "2929",
+                "924",
+                "AUTO ACTION",
+                "#1344",
+                "Covers Only",
+                "3"
+            ],
+            [
+                "5356",
+                "901",
+                "BEAUT BEADED BAGS",
+                "# 1",
+                "Full Copies",
+                "3"
+            ],
+            [
+                "5950",
+                "901",
+                "BETTER PHOTOGRAPHY",
+                "#55",
+                "Full Copies",
+                "3"
+            ],
+            [
+                "60009",
+                "905",
+                "BLISS",
+                "9-Apr",
+                "Covers Only",
+                "1"
+            ],
+            [
+                "6454",
+                "911",
+                "CARRY ON DVD NAT",
+                "NO 32",
+                "Full Copies",
+                "1"
+            ],
+            [
+                "7127",
+                "911",
+                "CL WAR MOVIES NAT",
+                "NO 30",
+                "Full Copies",
+                "1"
+            ],
+            [
+                "5210",
+                "902",
+                "COSMOPOLITAN PREGNANCY",
+                "WINT09",
+                "Full Copies",
+                "3"
+            ],
+            [
+                "5714",
+                "905",
+                "CRDMKNG STMPNG&PPRCRFT",
+                "V14#11",
+                "Full Copies",
+                "3"
+            ],
+            [
+                "7663",
+                "911",
+                "DORA DOLL NAT",
+                "NO 24",
+                "Full Copies",
+                "1"
+            ],
+            [
+                "1876",
+                "924",
+                "ECONOMIST THE",
+                "13-Jun",
+                "Covers Only",
+                "4"
+            ],
+            [
+                "1942",
+                "923",
+                "ENG WOMANS WEEKLY",
+                "16-Jun",
+                "Covers Only",
+                "1"
+            ],
+            [
+                "5919",
+                "906",
+                "FAST FOURS",
+                "9-Jun",
+                "Full Copies",
+                "2"
+            ]
+        ]
+    ],
+    "full_chat_history": [
+        {
+            "role": "user",
+            "content": "\n\n    Based on your information, generate a Python function that will take input dataset as input and apply the same transformation. \n    Include input data as the function parameter and ensure the code only outputs the function definition.\n    You should try to include as much the example functions in your system prompt be part of your code.\n    Make sure you include the input list in your python code as the function input.\n    Make sure to print the output of the function 'print(output_list)' in the end of the code.\n    \n    input list: [['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''], ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'], ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']]\n    output list: [['3099', '905', ' AUST 4WD CUST ACT', 'NO.14', 'Full Copies', '6.7839', '2'], ['3200', '906', 'AUST HOUSE & GARDEN', '9-Jun', 'Covers Only', '4.7385', '1']]\n    "
+        },
+        {
+            "role": "assistant",
+            "content": "```python\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[:5]  # Merge relevant parts\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n```"
+        },
+        {
+            "role": "user",
+            "content": "\n    Given the previous code and the identified high-level error,\n    modify only the code in the code history\u2014do not alter the input data\u2014to ensure the generated output matches the correct output.\n    Code history: \ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[:5]  # Merge relevant parts\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n\n    Error encountered: - The generated output contains duplicate entries within each sublist, specifically for columns representing certain metadata (e.g., date and issue title).\n- The correct output has 7 columns, whereas the generated output has 8 columns due to these duplicate entries.\n    Generated output: [['3099', '905', ' AUST 4WD CUST ACT', 'NO.14', 'NO.14', 'Full Copies', '6.7839', '2'], ['3200', '906', 'AUST HOUSE & GARDEN', '9-Jun', '9-Jun', 'Covers Only', '4.7385', '1']]\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```python\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[2:7]  # Merge relevant parts while excluding duplicate columns\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n```"
+        },
+        {
+            "role": "user",
+            "content": "\n    Given the previous code and the identified high-level error,\n    modify only the code in the code history\u2014do not alter the input data\u2014to ensure the generated output matches the correct output.\n    Code history: \ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            new_entry = temp_data + entry[2:7]  # Merge relevant parts while excluding duplicate columns\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n\n    Error encountered: - Extra columns in the generated output: The generated output contains two additional columns (`'* *'` and `'0'`) that are not present in the correct output.\n- Missing elements in specific rows: The generated output has missing elements (`'NO.14'` and `'9-Jun'`) compared to the correct output in their respective positions.\n- Misalignment of data due to missing or extra elements: The placement of elements is incorrect in the generated output due to the presence of extra columns and missing original elements.\n    Generated output: [['3099', '905', ' AUST 4WD CUST ACT', 'Full Copies', '6.7839', '2', '* *', '0'], ['3200', '906', 'AUST HOUSE & GARDEN', 'Covers Only', '4.7385', '1', '* *', '0']]\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```python\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts, correcting the range to exclude extra columns\n            new_entry = temp_data + entry[:5]\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n```"
+        },
+        {
+            "role": "user",
+            "content": "\n    Given the previous code and the identified high-level error,\n    modify only the code in the code history\u2014do not alter the input data\u2014to ensure the generated output matches the correct output.\n    Code history: \ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts, correcting the range to exclude extra columns\n            new_entry = temp_data + entry[:5]\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n\n    Error encountered: - The generated output contains duplicate entries within each sublist, specifically for columns representing certain attributes (e.g., 'NO.14' and '9-Jun' are repeated).\n- The generated output has an extra column within each sublist compared to the correct output, likely due to the aforementioned duplication.\n    Generated output: [['3099', '905', ' AUST 4WD CUST ACT', 'NO.14', 'NO.14', 'Full Copies', '6.7839', '2'], ['3200', '906', 'AUST HOUSE & GARDEN', '9-Jun', '9-Jun', 'Covers Only', '4.7385', '1']]\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```python\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts while ensuring no duplicates\n            new_entry = temp_data + entry[0:5:2]  # Select only the non-duplicate entries\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n```"
+        },
+        {
+            "role": "user",
+            "content": "\n    Given the code and the test list replace the function's input with the test list, without doing any modification to the code.\n    Please make sure to print the output of the function.\n\n    code: \ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts while ensuring no duplicates\n            new_entry = temp_data + entry[0:5:2]  # Select only the non-duplicate entries\n            output_list.append(new_entry)\n\n    print(output_list)\n\ninput_list = [\n    ['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''],\n    ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'],\n    ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0']\n]\n\ntransform_input(input_list)\n\n    test list: [['3167', '906', 'AUST PERSONAL COMPUTER', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '6.7839', '3', '* *', '0'], ['2929', '924', 'AUTO ACTION', '', '', '', ''], ['#1344', '#1344', 'Covers Only', '3.8181', '3', '* *', '0'], ['5356', '901', 'BEAUT BEADED BAGS', '', '', '', ''], ['# 1', '# 1', 'Full Copies', '10.1929', '3', '* *', '0'], ['5950', '901', 'BETTER PHOTOGRAPHY', '', '', '', ''], ['#55', '#55', 'Full Copies', '8.8293', '3', '* *', '0'], ['60009', '905', 'BLISS', '', '', '', ''], ['9-Apr', '9-Apr', 'Covers Only', '4.0567', '1', '* *', '0'], ['6454', '911', 'CARRY ON DVD NAT', '', '', '', ''], ['NO 32', 'NO 32', 'Full Copies', '13.6019', '1', '* *', '0'], ['7127', '911', 'CL WAR MOVIES NAT', '', '', '', ''], ['NO 30', 'NO 30', 'Full Copies', '13.6019', '1', '* *', '0'], ['5210', '902', 'COSMOPOLITAN PREGNANCY', '', '', '', ''], ['WINT09', 'WINT09', 'Full Copies', '9.2043', '3', '* *', '0'], ['5714', '905', 'CRDMKNG STMPNG&PPRCRFT', '', '', '', ''], ['V14#11', 'V14#11', 'Full Copies', '6.7839', '3', '* *', '0'], ['7663', '911', 'DORA DOLL NAT', '', '', '', ''], ['NO 24', 'NO 24', 'Full Copies', '5.4203', '1', '* *', '0'], ['1876', '924', 'ECONOMIST THE', '', '', '', ''], ['13-Jun', '13-Jun', 'Covers Only', '7.1589', '4', '* *', '0'], ['1942', '923', 'ENG WOMANS WEEKLY', '', '', '', ''], ['16-Jun', '16-Jun', 'Covers Only', '2.2499', '1', '* *', '0'], ['5919', '906', 'FAST FOURS', '', '', '', ''], ['9-Jun', '9-Jun', 'Full Copies', '6.7839', '2', '* *', '0']]\n    "
+        },
+        {
+            "role": "assistant",
+            "content": "```python\ndef transform_input(input_list):\n    output_list = []\n    temp_data = None\n\n    for entry in input_list:\n        if not entry[3]:  # Identifying the start of a new chunk\n            temp_data = entry[:3]\n        else:\n            # Merge relevant parts while ensuring no duplicates\n            new_entry = temp_data + entry[0:5:2]  # Select only the non-duplicate entries\n            output_list.append(new_entry)\n\n    print(output_list)\n\ntest_list = [\n    ['3167', '906', 'AUST PERSONAL COMPUTER', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Covers Only', '6.7839', '3', '* *', '0'],\n    ['2929', '924', 'AUTO ACTION', '', '', '', ''],\n    ['#1344', '#1344', 'Covers Only', '3.8181', '3', '* *', '0'],\n    ['5356', '901', 'BEAUT BEADED BAGS', '', '', '', ''],\n    ['# 1', '# 1', 'Full Copies', '10.1929', '3', '* *', '0'],\n    ['5950', '901', 'BETTER PHOTOGRAPHY', '', '', '', ''],\n    ['#55', '#55', 'Full Copies', '8.8293', '3', '* *', '0'],\n    ['60009', '905', 'BLISS', '', '', '', ''],\n    ['9-Apr', '9-Apr', 'Covers Only', '4.0567', '1', '* *', '0'],\n    ['6454', '911', 'CARRY ON DVD NAT', '', '', '', ''],\n    ['NO 32', 'NO 32', 'Full Copies', '13.6019', '1', '* *', '0'],\n    ['7127', '911', 'CL WAR MOVIES NAT', '', '', '', ''],\n    ['NO 30', 'NO 30', 'Full Copies', '13.6019', '1', '* *', '0'],\n    ['5210', '902', 'COSMOPOLITAN PREGNANCY', '', '', '', ''],\n    ['WINT09', 'WINT09', 'Full Copies', '9.2043', '3', '* *', '0'],\n    ['5714', '905', 'CRDMKNG STMPNG&PPRCRFT', '', '', '', ''],\n    ['V14#11', 'V14#11', 'Full Copies', '6.7839', '3', '* *', '0'],\n    ['7663', '911', 'DORA DOLL NAT', '', '', '', ''],\n    ['NO 24', 'NO 24', 'Full Copies', '5.4203', '1', '* *', '0'],\n    ['1876', '924', 'ECONOMIST THE', '', '', '', ''],\n    ['13-Jun', '13-Jun', 'Covers Only', '7.1589', '4', '* *', '0'],\n    ['1942', '923', 'ENG WOMANS WEEKLY', '', '', '', ''],\n    ['16-Jun', '16-Jun', 'Covers Only', '2.2499', '1', '* *', '0'],\n    ['5919', '906', 'FAST FOURS', '', '', '', ''],\n    ['9-Jun', '9-Jun', 'Full Copies', '6.7839', '2', '* *', '0']\n]\n\ntransform_input(test_list)\n```"
+        }
+    ]
+}

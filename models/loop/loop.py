@@ -4,6 +4,7 @@ import io
 import contextlib
 import prompt 
 from collections import defaultdict
+import time
 
 #"craigslist_data_wrangler","crime_data_wrangler", "potters_wheel_divide", "potters_wheel_fold" ,
 name_list = ["craigslist_data_wrangler","crime_data_wrangler", "potters_wheel_divide", "potters_wheel_fold" ,
@@ -49,7 +50,9 @@ def read_in_data(file_name):
 
         return input_data, output_data
 
-client = openai.Client('XXX')
+client = openai.Client(
+    api_key='sk-uUJWDlppyATaEVatYfmv7GgOs02eT2I7Dge57wxj07oMfR6n',
+    base_url = "https://xiaoai.plus/v1")
 
 def get_ouput(content, chat_history=None, error = False):
     settings = {
@@ -89,7 +92,7 @@ def get_ouput(content, chat_history=None, error = False):
 
 def gpt_output(specific_error):
         # loop thrpugh all the files
-        for j in range(2,3):
+        for j in name_list:
             if j in missing_list:
                 continue
             for i in range(1,6):
@@ -108,7 +111,10 @@ def gpt_output(specific_error):
                     code = code.split('```')[0]
                     code_result = run_code(code)
                     if isinstance(code_result, str):
-                        generated_output = eval(code_result)
+                        try:
+                            generated_output = eval(code_result)
+                        except:
+                            generated_output = code_result
                     else:
                         generated_output = code_result
                 else:
@@ -121,26 +127,37 @@ def gpt_output(specific_error):
                         num_try += 1
 
                         # identify the error
+                        
+                        print('generating errors')
                         error_prompt = ERROR_IDENTIFIER.format(
                             correct_output = input_data[1],
                             generated_output = generated_output
                         )
+                        start_time = time.time()
                         errors = get_ouput(error_prompt, error = True)
+                        mid_time = time.time()
+                        print('error time', mid_time - start_time)
                         tmp_dic['errors'].append(errors)
 
                         # retry with error identified
+                        print('retrying with error')
                         retry_with_error_prompt = RETRY_WITH_ERROR.format(
                             code_history = code,
                             error = errors,
                             generated_output = generated_output
                         )
                         answer, chat_history = get_ouput(retry_with_error_prompt,chat_history)
+                        end_time = time.time()
+                        print('retry time', end_time - mid_time)
                         if '```python' in answer:
                             code = answer.split('```python')[1]
                             code = code.split('```')[0]
                             code_result = run_code(code)
                             if isinstance(code_result, str):
-                                generated_output = eval(code_result)
+                                try:
+                                    generated_output = eval(code_result)
+                                except:
+                                    generated_output = code_result
                             else:
                                 generated_output = code_result
                         else:
@@ -162,7 +179,10 @@ def gpt_output(specific_error):
                             code = code.split('```')[0]
                             code_result = run_code(code)
                             if isinstance(code_result, str):
-                                generated_output = eval(code_result)
+                                try:
+                                    generated_output = eval(code_result)
+                                except:
+                                    generated_output = code_result
                             else:
                                 generated_output = code_result
                         else:
@@ -180,7 +200,10 @@ def gpt_output(specific_error):
                 code = code.split('```')[0]
                 code_result = run_code(code)
                 if isinstance(code_result, str):
-                    generated_output = eval(code_result)
+                    try:
+                        generated_output = eval(code_result)
+                    except:
+                        generated_output = 'DOUBLE CHECK' + ', '.join(map(str, code_result))
                 else:
                     generated_output = 'DOUBLE CHECK' + ', '.join(map(str, code_result))
                 tmp_dic['final'] = [code, generated_output]
