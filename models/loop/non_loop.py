@@ -44,8 +44,8 @@ def read_in_data(file_name):
         return input_data, output_data
 
 client = openai.Client(
-    api_key='sk-uUJWDlppyATaEVatYfmv7GgOs02eT2I7Dge57wxj07oMfR6n',
-    base_url = "https://xiaoai.plus/v1")
+#API key
+)
 
 def get_ouput(content, chat_history=None):
     settings = {
